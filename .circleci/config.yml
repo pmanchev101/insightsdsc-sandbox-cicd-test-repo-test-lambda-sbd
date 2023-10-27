@@ -1,0 +1,101 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.3 # upgrade to newest version
+
+executors:
+  py38:
+    docker:
+      - image: circleci/python:3.8-node
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
+  py-node:
+    docker:
+      - image: circleci/python:3.8.6-node
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
+
+commands:
+  setup_pynutrien_ssh_key:
+    steps:
+      - run:
+          # create public key file from environment variable
+          name: Create private key file
+          command: |
+            # add the missing newlines that were lost when saving as environment variable
+            echo $PYNUTRIEN_DEPLOY_KEY | sed "s/- /-\n/g" | sed "s/ -/\n-/g" | sed "2{s/ /\n/g}" > ~/.ssh/id_rsa_pynutrien
+            chmod 600 ~/.ssh/id_rsa_pynutrien
+      - run:
+          # make ssh aware of key by adding to config
+          name: Setup ssh config
+          command: |
+            touch ~/.ssh/config
+            echo "Host github.com" >> ~/.ssh/config
+            echo "  IdentitiesOnly yes" >> ~/.ssh/config
+            echo "  IdentityFile ~/.ssh/id_rsa_pynutrien" >> ~/.ssh/config
+  configure-aws-access:
+    steps:
+      - run:
+          name: Configure AWS access
+          command: |
+            mkdir -p ~/.aws
+            cat > ~/.aws/credentials \<< EOL
+            [default]
+            aws_access_key_id = $AWS_ACCESS_KEY
+            aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+            EOL
+
+jobs:
+  install-dependencies-to-workspace:
+    executor: py-node
+    steps:
+      - checkout
+      - setup_pynutrien_ssh_key
+      - configure-aws-access
+      - run:
+          name: Install python requirements and awscli
+          command: |
+            pip install awscli --target ~/.local-awscli
+            pip install -r lambdas/requirements.txt --target ~/.local-python-packages
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .local-python-packages
+            - .local-awscli
+
+  deploy:
+    executor: py-node
+    parameters:
+      stage:
+        type: string
+        default: $STAGE
+      region:
+        type: string
+        default: us-east-2
+    steps:
+      - checkout
+      - run:
+          command: |
+            sudo npm i -g serverless
+            npm install
+      - setup_pynutrien_ssh_key
+      - configure-aws-access
+      - run:
+          command: serverless deploy --stage <<parameters.stage>> --region <<parameters.region>>
+
+workflows:
+  version: 2
+  build-and-deploy-sandbox:
+    jobs:
+      - install-dependencies-to-workspace:
+          name: install-dependencies-to-workspace-sandbox
+          context: insights-dscdata-sandbox
+
+      - deploy:
+          name: deploy-all-functions
+          context: insights-dscdata-sandbox
+          requires:
+            - install-dependencies-to-workspace-sandbox
+

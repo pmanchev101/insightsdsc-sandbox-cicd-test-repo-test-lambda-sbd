@@ -1,0 +1,5 @@
+sandboxlz:
+  LambdaRole_Name: "dpfLambdaTestRole"
+  Lambda_Function_name: "insights-use1-dpf-old-method-test-Lambda"
+  Handler: "lambdas/devops_test_lambda.handler"
+  LambdaPolicy: ${file(./modules/lambda/lambda_policy.yml)}

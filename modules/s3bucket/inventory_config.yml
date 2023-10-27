@@ -1,0 +1,19 @@
+- Id: InventoryConfigurationId
+  Destination:
+    BucketArn: !Join
+      - ""
+      - - "arn:aws:s3:::"
+        - !Join
+          - "-"
+          - - !Ref "AWS::Region"
+            - !Ref "AWS::StackName"
+            - inventorybucket
+    Format: CSV
+    Prefix: InventoryDestinationPrefix
+  Enabled: true
+  IncludedObjectVersions: Current
+  Prefix: InventoryConfigurationPrefix
+  ScheduleFrequency: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Inventory_ScheduleFrequency}
+#LoggingConfiguration:
+#DestinationBucketName: !Ref LoggingBucket
+#LogFilePrefix: s3-logs

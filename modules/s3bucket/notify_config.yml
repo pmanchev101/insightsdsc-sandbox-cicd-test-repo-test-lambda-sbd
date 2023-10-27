@@ -1,0 +1,3 @@
+notifyconfig:
+  EventBridgeConfiguration:
+    EventBridgeEnabled: true

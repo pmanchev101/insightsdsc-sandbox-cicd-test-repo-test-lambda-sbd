@@ -1,0 +1,41 @@
+Parameters:
+  enablekmsencryption:
+    Type: String
+    Default: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Enable_KMS_Encryption}
+    AllowedValues:
+      - KMS
+      - SSE
+
+Conditions:
+  kmsencryption: !Equals [!Ref enablekmsencryption, KMS]
+
+Resources:
+  rawS3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Bucket_Name}
+      AccessControl: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Access_Control}
+      PublicAccessBlockConfiguration: ${file(./modules/s3bucket/public_access_block_configuration.yml):PublicAccessBlockConfiguration}
+#      BucketEncryption: ${file(./modules/s3bucket/bucket_encryption.yml):BucketEncryption}
+      ObjectLockEnabled: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Object_Lockenabled}
+      # VersioningConfiguration:
+      #   Status: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Versioning_Configuration}
+      # NotificationConfiguration:
+      #   EventBridgeConfiguration:
+      #     EventBridgeEnabled: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Notification_Configuration}
+      # LifecycleConfiguration: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Lifecycle_Configuration}
+      # ReplicationConfiguration: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.ReplicationConfiguration}
+      # CorsConfiguration: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Cors_configuration}
+      # WebsiteConfiguration: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Website_Configuration}
+      # InventoryConfigurations: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Inventory_Configurations}
+      LoggingConfiguration: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Logging_Bucket}
+      Tags:  ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.Tags}
+
+#  ####### S3 Bucket policy ######
+#  rawBucketPolicy:
+#    Type: "AWS::S3::BucketPolicy"
+#    DependsOn: rawS3Bucket
+#    Properties:
+#      Bucket: !Ref rawS3Bucket
+#      PolicyDocument:
+#        Statement: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.S3_Bucket_Policy}

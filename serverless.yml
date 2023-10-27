@@ -1,0 +1,34 @@
+configValidationMode: error
+custom:
+  assets:
+    auto: true
+    targets:
+    - bucket: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.glueResourcesBucket}
+      files:
+      - globs: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Glue_Job_Script_Name}
+        source: gluescripts
+      prefix: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.glueResourcesPrefix}
+  pythonRequirements:
+    fileName: lambdas/requirements.txt
+    layer: true
+functions:
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-engine-hours/serverless/lambda.yml)}
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-organizations/serverless/lambda.yml)}
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/lambda.yml)}
+plugins:
+- serverless-deployment-bucket
+- serverless-python-requirements
+- serverless-s3-deploy
+provider:
+  deploymentBucket: insightsdsc-use2-${opt:stage}-shared-deployment
+  name: aws
+  runtime: python3.8
+  stackTags: ${self:provider.tags}
+  stage: ${opt:stage}
+  tags: ${file(./tags.yml)}
+resources:
+- ${file(./modules/s3bucket/s3main.yml)}
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-engine-hours/serverless/lambda_role.yml)}
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-organizations/serverless/lambda_role.yml)}
+- ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/lambda_role.yml)}
+service: insights-dscdata-cicd-test

@@ -1,0 +1,8 @@
+Rules:
+  - Id: LifeCycleRule
+    Prefix: INTELLIGENT_TIERING
+    Status: Enabled
+    ExpirationInDays: 365
+    Transitions:
+      - TransitionInDays: 1
+        StorageClass: INTELLIGENT_TIERING

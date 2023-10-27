@@ -1,0 +1,69 @@
+Name: cloudtrails
+Description: AWS CloudTrail data
+TableType: EXTERNAL_TABLE
+Parameters: {
+  "EXTERNAL": "TRUE"
+}
+StorageDescriptor:
+  Columns:
+    - Name: eventversion
+      Type: string
+    - Name: useridentity
+      Type: struct<type:string,principalid:string,arn:string,accountid:string,invokedby:string,accesskeyid:string,username:string,sessioncontext:struct<attributes:struct<mfaauthenticated:string,creationdate:string>,sessionissuer:struct<type:string,principalid:string,arn:string,accountid:string,username:string>>>
+    - Name: eventtime
+      Type: string
+    - Name: eventsource
+      Type: string
+    - Name: eventname
+      Type: string
+    - Name: awsregion
+      Type: string
+    - Name: sourceipaddress
+      Type: string
+    - Name: useragent
+      Type: string
+    - Name: errorcode
+      Type: string
+    - Name: errormessage
+      Type: string
+    - Name: requestparameters
+      Type: string
+    - Name: responseelements
+      Type: string
+    - Name: additionaleventdata
+      Type: string
+    - Name: requestid
+      Type: string
+    - Name: eventid
+      Type: string
+    - Name: resources
+      Type: array<struct<arn:string,accountid:string,type:string>>
+    - Name: eventtype
+      Type: string
+    - Name: apiversion
+      Type: string
+    - Name: readonly
+      Type: string
+    - Name: recipientaccountid
+      Type: string
+    - Name: serviceeventdetails
+      Type: string
+    - Name: sharedeventid
+      Type: string
+    - Name: vpcendpointid
+      Type: string
+    - Name: _
+      Type: string
+  Location:
+    Fn::Sub: s3://insights-use1-sandboxlz-vignesh-dpf-test-bucket/glue/glue_table_AWS_logs/ #S3://adastra-nutrien-lambda-code-bucket/AWSLogs/${AWS::AccountId}/CloudTrail/
+  InputFormat: com.amazon.emr.cloudtrail.CloudTrailInputFormat
+  OutputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+  Compressed: False
+  StoredAsSubDirectories: False
+  SerdeInfo:
+    SerializationLibrary: com.amazon.emr.hive.serde.CloudTrailSerde
+    Parameters: {
+      "serialization.format": "1"
+    }
+  Parameters: {}
+Retention: 0

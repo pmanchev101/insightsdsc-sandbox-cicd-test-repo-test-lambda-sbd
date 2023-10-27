@@ -1,0 +1,53 @@
+Description: "AWS Glue Job"
+Resources:
+
+  dpfGlueRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "glue.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonAthenaFullAccess"
+      Policies:
+        - 
+          PolicyName: "GluePolicy"
+          PolicyDocument: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Glue_IAM_Policy}
+
+  dpfTestGlueJob:
+    Type: AWS::Glue::Job
+    Properties: 
+      AllocatedCapacity: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Allocated_Capacity}
+      Command: 
+        Name: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.glue_command_1}
+        ScriptLocation: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.glueScriptLocation1}
+      Connections: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Connections_List}
+      DefaultArguments: {
+        "--enable-metrics": "true",
+        "--bucket": "insights-use1-sandboxlz-vignesh-dpf-test-bucket",
+        "--output-prefix": "glue/crawler_data/"
+      }
+      Description: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Job_Description_1}
+      ExecutionClass: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Execution_Class}
+      ExecutionProperty: 
+        MaxConcurrentRuns: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Max_Concurrent_Runs}
+      GlueVersion: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Glue_Version}
+      MaxRetries: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Max_Retries}
+      Name: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Glue_Job_Name}
+      # NonOverridableArguments: ${file(./modules/glue/params.yml):${file(./env.yml):Stage}.NonOverridable_Arguments}
+      NotificationProperty: 
+        NotifyDelayAfter: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Notify_Delay_After}
+      Role: !Ref dpfGlueRole
+      SecurityConfiguration: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Security_Configuration}
+      Timeout: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Timeout}
+      #Tags: ${file(./modules/glue/params.yml):${file(./env.yml):Stage}.Tags}
+      # MaxCapacity: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Max_Capacity} -> If Allocated Capacity has value do not pass parameter
+      # NumberOfWorkers: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Number_Of_Workers} -> If Allocated Capacity has value do not pass parameter
+      # WorkerType: ${file(./modules/glue_job/params.yml):${file(./env.yml):Stage}.Worker_Type} -> If Allocated Capacity has value do not pass parameter

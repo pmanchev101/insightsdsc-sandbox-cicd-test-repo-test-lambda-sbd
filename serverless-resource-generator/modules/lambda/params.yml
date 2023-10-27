@@ -1,0 +1,5 @@
+sandbox:
+  LambdaRole_Name: "<<!lambda_yml_name!>>Role"
+  Lambda_Function_name: "<<!lambda_name!>>"
+  Handler: "<<!lambda_folder!>>/<<!lambda_name!>>/handler.lambda_handler"
+  LambdaPolicy: ${file(./<<!lambda_folder!>>/<<!lambda_name!>>/serverless/lambda_policy.yml)}

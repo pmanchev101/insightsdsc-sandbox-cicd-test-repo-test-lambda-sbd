@@ -1,0 +1,18 @@
+Resources:
+  GlueSecuritySettings:
+    Type: AWS::Glue::SecurityConfiguration
+    Properties: 
+      EncryptionConfiguration: 
+        S3Encryptions:
+        - S3EncryptionMode:
+            ${file(./modules/glue_security_configuration/params.yml):${file(./env.yml):Stage}.S3_Encryption_Type} 
+          KmsKeyArn:
+            ${file(./modules/glue_security_configuration/params.yml):${file(./env.yml):Stage}.Kms_Key_Id} 
+        CloudWatchEncryption:
+          CloudWatchEncryptionMode: 
+            ${file(./modules/glue_security_configuration/params.yml):${file(./env.yml):Stage}.CloudWatch_Encryption_Mode}  
+        JobBookmarksEncryption:
+          JobBookmarksEncryptionMode: #DISABLED
+            ${file(./modules/glue_security_configuration/params.yml):${file(./env.yml):Stage}.JobBookmarks_Encryption_Mode}  
+      Name: ${file(./modules/glue_security_configuration/params.yml):${file(./env.yml):Stage}.Glue_SecurityConfig_Name} 
+

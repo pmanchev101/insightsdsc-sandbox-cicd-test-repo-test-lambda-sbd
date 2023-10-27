@@ -1,0 +1,3 @@
+sandboxlz:
+  Glue_DB_name: "insights-use1-sandboxlz-dpf-test-glue-database"
+  Table_Input: "${file(./modules/glue_table/glue_table_input.yml)}" # modules/glue_table/glue_table_input.yml

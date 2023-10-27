@@ -1,0 +1,10 @@
+sandboxlz:
+  crawler_name: "insights-use1-sandboxlz-dpf-test-crawler"
+  S3_Path_1: "insights-use1-sandboxlz-vignesh-dpf-test-bucket"
+  S3_Path_2: "s3://insights-use1-sandboxlz-vignesh-dpf-test-bucket/glue/crawler_data/"
+  Schema_UpdateBehavior: "UPDATE_IN_DATABASE"
+  Schema_DeleteBehavior: "LOG"
+  Schedule_Expression: "cron(0/10 * ? * MON-FRI *)"
+  Glue_IAM_Policy: "${file(./modules/glue_crawler/glue_policy_document.yml)}"
+  Json_Tags: "${file(./json_type_tags.yml)}"
+  Glue_DB_name: "insights-use1-sandboxlz-dpf-test-glue-database"

@@ -1,0 +1,5 @@
+sandboxlz:
+  Permission_Item: 'arn:aws:iam::738774084799:role/Insights-Developers'                   #IAM role needed for Lake formation permission
+  Catalog_ID: "738774084799"
+  Database_Name: insights-use1-ibm-final
+  Table_Name: text_text

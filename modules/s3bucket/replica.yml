@@ -1,0 +1,8 @@
+Role: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.bucket_replica_role}
+Rules:
+  - Id: TestRule
+    Status: Enabled
+    Prefix: test
+    Destination:
+      Bucket: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.bucket_replica_target_bucket}
+      StorageClass: STANDARD

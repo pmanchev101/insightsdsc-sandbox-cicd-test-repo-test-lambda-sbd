@@ -1,0 +1,5 @@
+PublicAccessBlockConfiguration:
+  BlockPublicAcls: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.BlockPublic_Acls}
+  IgnorePublicAcls: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.IgnorePublic_Acls}
+  BlockPublicPolicy: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.BlockPublic_Policy}
+  RestrictPublicBuckets: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.RestrictPublic_Buckets}

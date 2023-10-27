@@ -1,0 +1,57 @@
+Resources:
+  GlueCrawlerServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "glue.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+        ['arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole']
+      Policies:
+        -
+          PolicyName: "S3BucketAccessPolicy"
+          PolicyDocument: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Glue_IAM_Policy}
+                                                    
+  # GlueClassifier:
+  #   Type: AWS::Glue::Classifier
+  #   Properties:
+  #     GrokClassifier:
+  #       Name: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Classifier_Name}
+  #       Classification: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Classifier_Classification}
+  #       GrokPattern: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Grok_Pattern}
+  
+  S3BucketCrawler:
+    Type: AWS::Glue::Crawler
+    Properties:
+      Name: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.crawler_name}
+      Role: !GetAtt GlueCrawlerServiceRole.Arn
+      DatabaseName: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Glue_DB_name}
+      # Classifiers:
+      #   - !Ref GlueClassifier
+      Targets:
+        S3Targets:
+          - Path: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.S3_Path_1}
+          - Path: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.S3_Path_2}
+      SchemaChangePolicy:
+        UpdateBehavior: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Schema_UpdateBehavior}
+        DeleteBehavior: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Schema_DeleteBehavior}
+      Schedule:
+        ScheduleExpression: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Schedule_Expression}
+
+      Tags: ${file(./modules/glue_crawler/params.yml):${file(./env.yml):Stage}.Json_Tags}
+
+
+
+
+
+
+
+

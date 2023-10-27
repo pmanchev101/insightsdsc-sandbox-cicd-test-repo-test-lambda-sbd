@@ -1,0 +1,20 @@
+Resources:
+  DFPTESTAthenaWorkGroup: #Change this line for all project
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.WorkGroup_Name} 
+      Description: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.WorkGroup_Description}
+      State: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.WorkGroup_State}
+      RecursiveDeleteOption: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Recursive_Delete_Option}
+      WorkGroupConfiguration:
+        BytesScannedCutoffPerQuery: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Bytes_Scanned_Cutoff_PerQuery}
+        EnforceWorkGroupConfiguration: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Enforce_WorkGroup_Configuration}
+        EngineVersion:
+          SelectedEngineVersion: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Selected_Engine_Version}
+        PublishCloudWatchMetricsEnabled: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Publish_CloudWatchMetrics_Enabled}
+        RequesterPaysEnabled: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Requester_Pays_Enabled}
+        ResultConfiguration:
+          EncryptionConfiguration:
+            EncryptionOption: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Encryption_Option}
+          OutputLocation: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Output_Location}
+      # Tags:  ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Tags} 

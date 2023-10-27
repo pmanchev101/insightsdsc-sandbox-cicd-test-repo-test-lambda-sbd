@@ -1,0 +1,10 @@
+CorsRules:
+  - AllowedHeaders:
+      - "*"
+    AllowedMethods:
+      - GET
+      - PUT
+      - POST
+    AllowedOrigins:
+      - "*"
+    MaxAge: 3600

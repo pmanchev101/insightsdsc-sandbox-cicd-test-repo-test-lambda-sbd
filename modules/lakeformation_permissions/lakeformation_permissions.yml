@@ -1,0 +1,67 @@
+Resources:
+  InsightsDatalakeDBPermissions:
+    Type: AWS::LakeFormation::PrincipalPermissions
+    Properties:
+      Principal:
+        DataLakePrincipalIdentifier: 'arn:aws:iam::738774084799:role/Insights-Developers' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Permission_Item} #only single role a at time
+      Resource:
+        Database:
+          CatalogId: "738774084799" #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Catalog_ID}
+          Name: 'insights-use1-ibm-final' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Table_Name}
+      Permissions: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_List}
+        - "CREATE_TABLE"
+        - "ALTER"
+        - "DROP"
+        - "DESCRIBE"  
+      PermissionsWithGrantOption: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_With_Grant}
+        - "CREATE_TABLE"
+        - "ALTER"
+        - "DROP"
+        - "DESCRIBE"
+
+
+##### Comment only one of the below section
+##### No Field / Row restriction applied        
+
+  InsightsDatalakeTablePermissions:
+    Type: AWS::LakeFormation::PrincipalPermissions
+    Properties:
+      Principal:
+        DataLakePrincipalIdentifier: 'arn:aws:iam::738774084799:role/Insights-Developers' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Permission_Item} #only single role a at time
+      Resource:
+        Table:
+          CatalogId: "738774084799" #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Catalog_ID}
+          DatabaseName: 'insights-use1-ibm-final' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Database_Name} 
+          Name: text_text #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Table_Name}
+      Permissions: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_List}
+        # - "SELECT"
+        # - "INSERT"
+        # - "DELETE"
+        # - "ALTER"
+        # - "DROP"
+        - "DESCRIBE"
+      PermissionsWithGrantOption: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_With_Grant}
+        # - "SELECT"
+        # - "INSERT"
+        # - "DELETE"
+        # - "ALTER"
+        # - "DROP"
+        - "DESCRIBE"
+
+##### Field / Row restriction applied   
+  # InsightsDatalakeTableColumnsPermissions:
+  #   Type: AWS::LakeFormation::PrincipalPermissions
+  #   Properties:
+  #     Principal:
+  #       DataLakePrincipalIdentifier: 'arn:aws:iam::738774084799:role/Insights-Developers' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Permission_Item} #only single role a at time
+  #     Resource:
+  #       TableWithColumns:
+  #         CatalogId: "738774084799" #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Catalog_ID}
+  #         DatabaseName: 'insights-use1-ibm-final' #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Database_Name} 
+  #         Name: text_text #${file(./cloudformation/modules/lakeformation_permissions/params.yml):${file(./cloudformation/modules/env.yml):Stage}.Table_Name}
+  #         ColumnNames:
+  #           - "file_name"
+  #     Permissions: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_List}
+  #       - "SELECT"
+  #     PermissionsWithGrantOption: #${file(./lakeformation_permissions/params.yml):${file(./env.yml):Stage}.Permission_With_Grant}
+  #       - "SELECT"

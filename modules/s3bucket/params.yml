@@ -1,0 +1,52 @@
+base: &base
+  Bucket_Name: "insightsdsc-use2-${opt:stage}-cicd-example-bucket"
+  Enable_KMS_Encryption: "SSE"
+
+sandbox: &sandbox
+  <<: *base
+
+  accountId: 610242957902
+  # Bucket_Name: "insights-use1-sandboxlz-dpf-example-bucket"
+  # Bucket_Name: "insights-use1-${opt:stage}-dpf-example-bucket"
+#  S3_Bucket_Policy: "${file(./modules/s3bucket/s3bucketpolicy.yml)}"
+  Encryption_Type: "AES256" #or KMS Key
+  Access_Control: "BucketOwnerFullControl"
+#  Versioning_Configuration: "Enabled"
+  BlockPublic_Acls: true
+  IgnorePublic_Acls: true
+  BlockPublic_Policy: true
+  RestrictPublic_Buckets: true
+  Object_Lockenabled: false
+  Notification_Configuration: true
+#  KMSMasterKeyID: "8f6df423-dc4c-413b-8898-f6b2fcceb2fd"
+  # Enable_KMS_Encryption: "KMS"
+#  Lifecycle_Configuration: "${file(./modules/s3bucket/lifecycle_rule.yml)}"
+#  ReplicationConfiguration: "${file(./modules/s3bucket/replica.yml)}"
+#  Cors_configuration: "${file(./modules/s3bucket/corsconfig.yml)}"
+#  Website_Configuration: "${file(./modules/s3bucket/websiteconfig.yml)}"
+#  Inventory_Configurations: "${file(./modules/s3bucket/inventory_config.yml)}"
+#  Inventory_ScheduleFrequency: Weekly
+#  bucket_replica_role: arn:aws:iam::738774084799:role/insights-use1-sandboxlz-dpf-s3-replica-role
+#  bucket_replica_target_bucket: arn:aws:s3:::insights-use1-sandboxlz-dpf-s3-service-replica-bucket
+  logging_bucket_value: aws-landing-zone-s3-logs-610242957902-us-east-2
+  Logging_Bucket: "${file(./modules/s3bucket/logging_bucket.yml)}"
+  Tags: "${file(./modules/s3bucket/tags.yml)}"
+
+#dev: &dev
+#  <<: *base
+#  accountId: 256796151170
+#
+#  S3_Bucket_Policy: "${file(./modules/s3bucket/s3bucketpolicy.yml)}"
+#  # Enable_KMS_Encryption: "KMS"
+#
+#qa: &qa
+#  <<: *base
+#  accountId: 937309458692
+#
+#  S3_Bucket_Policy: "${file(./modules/s3bucket/s3bucketpolicy.yml)}"
+#
+#prod: &prod:
+#  <<: *base
+#  accountId: 907874592396
+#
+#  S3_Bucket_Policy: "${file(./modules/s3bucket/s3bucketpolicy.yml)}"

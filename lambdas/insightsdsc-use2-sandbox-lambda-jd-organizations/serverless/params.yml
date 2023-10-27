@@ -1,0 +1,5 @@
+sandbox:
+  LambdaRole_Name: "InsightsdscUse2SandboxLambdaJdOrganizationsRole"
+  Lambda_Function_name: "insightsdsc-use2-sandbox-lambda-jd-organizations"
+  Handler: "lambdas/insightsdsc-use2-sandbox-lambda-jd-organizations/handler.lambda_handler"
+  LambdaPolicy: ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-organizations/serverless/lambda_policy.yml)}

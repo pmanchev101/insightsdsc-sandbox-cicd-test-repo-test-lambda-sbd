@@ -1,0 +1,5 @@
+BucketEncryption:
+  ServerSideEncryptionConfiguration:
+    - ServerSideEncryptionByDefault:
+        KMSMasterKeyID: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.KMSMasterKeyID}
+        SSEAlgorithm: "aws:kms"

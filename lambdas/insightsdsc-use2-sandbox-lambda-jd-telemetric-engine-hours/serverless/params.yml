@@ -1,0 +1,5 @@
+sandbox:
+  LambdaRole_Name: "InsightsdscUse2SandboxLambdaJdTelemetricEngineHoursRole"
+  Lambda_Function_name: "insightsdsc-use2-sandbox-lambda-jd-telemetric-engine-hours"
+  Handler: "lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-engine-hours/handler.lambda_handler"
+  LambdaPolicy: ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-engine-hours/serverless/lambda_policy.yml)}

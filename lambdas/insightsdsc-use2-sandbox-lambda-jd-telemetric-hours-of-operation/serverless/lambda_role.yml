@@ -1,0 +1,29 @@
+Resources:
+  LambdaManagedPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement: 
+          ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/params.yml):${file(./env.yml):Stage}.LambdaPolicy}
+  
+  InsightsdscUse2SandboxLambdaJdTelemetricHoursOfOperationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/params.yml):${file(./env.yml):Stage}.LambdaRole_Name}
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 
+                lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service: 
+                sqs.amazonaws.com
+            Action: 'sts:AssumeRole'
+
+      Path: /
+      ManagedPolicyArns:
+        - !Ref LambdaManagedPolicy

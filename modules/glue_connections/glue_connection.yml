@@ -1,0 +1,13 @@
+Resources:
+  GlueConnection:
+    Type: AWS::Glue::Connection
+    Properties: 
+      CatalogId: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Account_ID_Number}
+      ConnectionInput:
+        Name: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Connection_Name} 
+        Description: This allows glue to connect to through Network # Parameterize the descp
+        ConnectionType: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Connection_Type}
+        PhysicalConnectionRequirements:
+          AvailabilityZone: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Availability_Zone}
+          SecurityGroupIdList: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Security_GroupId_List}
+          SubnetId: ${file(./modules/glue_connections/params.yml):${file(./env.yml):Stage}.Subnet_Id}

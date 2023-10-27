@@ -1,0 +1,36 @@
+sandboxlz:
+  Account_ID_Number: "738774084799"
+  Connection_Name: "insights-dpf-test-shared-connection"
+  Connection_Type: "NETWORK"
+  Availability_Zone: "us-east-1a"
+  Security_GroupId_List: 
+    - "sg-021feb8e91e399eac"
+  Subnet_Id: "subnet-077d5743bb28959e9"
+
+# dev:
+#   Account_ID_Number: "686529896488"
+#   Connection_Name: "insights-shared-connection"
+#   Connection_Type: "NETWORK"
+#   Availability_Zone: "us-east-1a"
+#   Security_GroupId_List: 
+#     - "sg-08ef0e8a73d7e7841"
+#   Subnet_Id: "subnet-04a6918c4a904fef1"
+
+# uat:
+#   Account_ID_Number: "686529896488"
+#   Connection_Name: "insights-shared-connection"
+#   Connection_Type: "NETWORK"
+#   Availability_Zone: "us-east-1a"
+#   Security_GroupId_List: 
+#     - "sg-08ef0e8a73d7e7841"
+#   Subnet_Id: "subnet-04a6918c4a904fef1"
+
+# prod:
+#   Account_ID_Number: "686529896488"
+#   Connection_Name: "insights-shared-connection"
+#   Connection_Type: "NETWORK"
+#   Availability_Zone: "us-east-1a"
+#   Security_GroupId_List: 
+#     - "sg-08ef0e8a73d7e7841"
+#   Subnet_Id: "subnet-04a6918c4a904fef1"
+

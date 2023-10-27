@@ -1,0 +1,8 @@
+{  
+  "owner": "Insights",
+  "project-name": "dpf severless templates",
+  "department-functionalarea": "TBD",
+  "pipeline": "TBD",
+  "application": "TBD",
+  "environment": "${opt:stage}"
+}

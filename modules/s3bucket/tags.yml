@@ -1,0 +1,12 @@
+- Key: owner
+  Value: Insights
+- Key: project-name
+  Value: dpf severless templates
+- Key: department-functionalarea
+  Value: TBD
+- Key: pipeline
+  Value: TBD
+- Key: application
+  Value: TBD
+- Key: environment
+  Value: ${opt:stage}

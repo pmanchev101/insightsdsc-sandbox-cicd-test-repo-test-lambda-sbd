@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="25205982-16ac-4bcd-bd17-5b2a85bc8402" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/handler.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WiqR1CjiI9gLsa4PpPMA7Lpyc0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "test-lambda-sbd",
+    "last_opened_file_path": "C:/Users/Haowei.Gao/PycharmProjects/insightsdsc-sandbox-cicd-test-repo/glue",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\glue" />
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\serverless-resource-generator\modules\lambda" />
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\lambdas\test-lambda2" />
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\lambdas\test-lambda" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\glue\jobs" />
+      <recent name="C:\Users\Haowei.Gao\PycharmProjects\insightsdsc-sandbox-cicd-test-repo\lambdas\test-lambda\serverless" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25205982-16ac-4bcd-bd17-5b2a85bc8402" name="Changes" comment="" />
+      <created>1697225735870</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697225735870</updated>
+    </task>
+    <servers />
+  </component>
+</project>

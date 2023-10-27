@@ -1,0 +1,18 @@
+Action:
+  - "s3:*"
+Sid: AllowSSLRequestsOnly
+Effect: Deny
+Resource:
+  - "Fn::Join":
+      - ""
+      - - "arn:aws:s3:::"
+        - Ref: rawS3Bucket
+        - /*
+  - "Fn::Join":
+      - ""
+      - - "arn:aws:s3:::"
+        - Ref: rawS3Bucket
+Principal: "*"
+Condition:
+  Bool:
+    "aws:SecureTransport": "false"

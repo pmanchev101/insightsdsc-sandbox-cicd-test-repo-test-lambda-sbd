@@ -1,0 +1,10 @@
+attributedefn:
+  - AttributeName: "id"
+    AttributeType: "S"
+  - AttributeName: "file_id"
+    AttributeType: "S"
+keyschema:
+  - AttributeName: "id"
+    KeyType: "HASH"
+  - AttributeName: "file_id"
+    KeyType: "RANGE"

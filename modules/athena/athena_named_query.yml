@@ -1,0 +1,9 @@
+Resources:
+  DFPTESTAthenaNamedQuery:
+    Type: AWS::Athena::NamedQuery
+    Properties:
+      Database: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Database_Name}
+      Description: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Description}
+      Name: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Query_Name}
+      QueryString: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.Query_String} 
+      WorkGroup: ${file(./modules/athena/params.yml):${file(./env.yml):Stage}.WorkGroup_Name}  

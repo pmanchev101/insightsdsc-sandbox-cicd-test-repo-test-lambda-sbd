@@ -1,0 +1,2 @@
+DestinationBucketName: ${file(./modules/s3bucket/params.yml):${file(./env.yml):Stage}.logging_bucket_value}
+LogFilePrefix: testing-logs

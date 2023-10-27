@@ -1,0 +1,18 @@
+sandboxlz:
+  WorkGroup_Name: insights-use1-sandboxlz-dpf-test                                                                        #name of workgroup
+  WorkGroup_Description:  Workgroup for Athena Insights DPF testing                                                       #business description of workgroup 
+  WorkGroup_State: ENABLED                                                                                                #status of workgroup
+  Recursive_Delete_Option: false                                                                                          #TDB
+  Bytes_Scanned_Cutoff_PerQuery: 10000000                                                                                 #Scan size cut off limit
+  Enforce_WorkGroup_Configuration: true                                                                                   #Strict enforcement of workgroup settings
+  Selected_Engine_Version: Athena engine version 3                                                                        #Athena engine type selection
+  Publish_CloudWatchMetrics_Enabled: true                                                                                 #Athena workgroup metrics published to CloudWatch Metrics
+  Requester_Pays_Enabled: false                                                                                           #Indicator for enabling and disabiling requestor pays, does not work with lakeformation share
+  Encryption_Option: SSE_S3                                                                                               #Output s3 bucket encryption option
+  Output_Location: "s3://insights-use1-sdbx-athena-query-data/"                                                           #S3 output location 
+  Database_Name:  "insights_sandboxlz_shared_historian_metadata_rl"                                                       #Database name for saved/named query
+  Description: "A query that selects all aggregated data"                                                                 #Description of named query
+  Query_Name: "filter_params"                                                                                             #technical name for saved query                                                              
+  Query_String:  'SELECT * FROM "insights_sandboxlz_shared_historian_metadata_rl"."filter_parameters" limit 10'           #SQL Query string
+  Tags: "${file(./tags.yml)}"                                                                                             #Tags that added to resources stored in .tags.yml file
+

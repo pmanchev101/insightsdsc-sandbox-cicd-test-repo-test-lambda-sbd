@@ -1,0 +1,13 @@
+# https://www.serverless.com/framework/docs/providers/aws/guide/functions
+<<!lambda_yml_name!>>:
+    name: ${file(./<<!lambda_folder!>>/<<!lambda_name!>>/serverless/params.yml):${file(./env.yml):Stage}.Lambda_Function_name}
+    handler: ${file(./<<!lambda_folder!>>/<<!lambda_name!>>/serverless/params.yml):${file(./env.yml):Stage}.Handler}
+    role: <<!lambda_yml_name!>>Role
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer } # requires serverless-python-requirements
+    package:
+      individually: true
+      exclude:
+        - ./**
+        - "!./<<!lambda_folder!>>/<<!lambda_name!>>/*.py"
+        - "!./lambdas/utils/*.py"

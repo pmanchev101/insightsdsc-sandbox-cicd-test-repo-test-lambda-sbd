@@ -1,0 +1,13 @@
+# https://www.serverless.com/framework/docs/providers/aws/guide/functions
+InsightsdscUse2SandboxLambdaJdTelemetricHoursOfOperation:
+    name: ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/params.yml):${file(./env.yml):Stage}.Lambda_Function_name}
+    handler: ${file(./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/serverless/params.yml):${file(./env.yml):Stage}.Handler}
+    role: InsightsdscUse2SandboxLambdaJdTelemetricHoursOfOperationRole
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer } # requires serverless-python-requirements
+    package:
+      individually: true
+      exclude:
+        - ./**
+        - "!./lambdas/insightsdsc-use2-sandbox-lambda-jd-telemetric-hours-of-operation/*.py"
+        - "!./lambdas/utils/*.py"

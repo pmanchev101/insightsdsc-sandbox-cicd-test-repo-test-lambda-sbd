@@ -1,0 +1,9 @@
+Version: "2012-10-17" 
+Statement: 
+  Sid: GlueCrawlerPermissions
+  Effect: Allow
+  Action:
+    - s3:GetObject
+    - s3:PutObject  
+  Resource:
+    - "arn:aws:s3:::insights-use1-sandboxlz-vignesh-dpf-test-bucket"

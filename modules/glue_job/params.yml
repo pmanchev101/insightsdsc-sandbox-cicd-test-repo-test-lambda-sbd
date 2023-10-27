@@ -1,0 +1,31 @@
+sandbox:
+
+  # Universal Glue Job Params
+  Allocated_Capacity: 1
+  glueResourcesBucket: insightsdsc-use2-sandbox-shared-glue-resources # DO NOT CHANGE
+  glueResourcesPrefix: scripts/waldo/ # CHANGE BASED ON PROJECT
+  Timeout: 2880
+  Glue_IAM_Policy: "${file(./modules/glue_job/glue_job_policy_document.yml)}"
+  Connections_List: "${file(./modules/glue_job/glue_job_connections.yml)}" 
+  Execution_Class: "STANDARD" #Allowed values: "FLEX, STANDARD"
+  Max_Concurrent_Runs: 1
+  Glue_Version: "3.0"
+  Notify_Delay_After: 5
+  Security_Configuration: "None"
+  Max_Retries: 1
+  #Default_Arguments: "${file(./modules/glue/glue_job_default_arguments.yml)}"  # NEED TO REVIST
+
+  
+  # Glue Job 1
+  Glue_Job_Name: "insights-use1-sandboxlz-dpf-glue-job-test"
+  Glue_Job_Script_Name: glue_script.py
+  glue_command_1: 'GlueJobCommand'
+  glueScriptLocation1: s3://insights-use1-sandboxlz-vignesh-dpf-test-bucket/glue/code/glue_script.py
+  Job_Description_1: "This is a test glue job that is created by the templates provided from Adastra"
+
+  # Optional Parameters:
+  Worker_Type: "Standard" #Accepts a value of Standard, G.1X, or G.2X, Only use of Allocated Capicity isnt used
+  # Number_Of_Workers: 2 -> Only use of Allocated Capicity isnt used
+  # Max_Capacity: 1 -> Only use of Allocated Capicity isnt used
+
+  

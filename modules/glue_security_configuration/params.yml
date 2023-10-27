@@ -1,0 +1,6 @@
+sandboxlz:
+  Glue_SecurityConfig_Name: "Insights-dpf-glue-security-config" 
+  S3_Encryption_Type: SSE-KMS
+  CloudWatch_Encryption_Mode: DISABLED
+  JobBookmarks_Encryption_Mode: DISABLED
+  Kms_Key_Id: "arn:aws:kms:us-east-1:738774084799:key/3917ddb7-8620-48db-b5f0-cd3bc11937e8"

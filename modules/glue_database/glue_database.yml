@@ -1,0 +1,14 @@
+Resources:
+  GlueDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: ${file(./modules/glue_database/params.yml):${file(./env.yml):Stage}.Glue_DB_name} # 
+        Description: 'This is a test glue database for DPF testing'
+
+Outputs:
+  RawDatabasename:
+    Value: !Ref GlueDatabase
+    Export:
+      Name: Glue-db-name

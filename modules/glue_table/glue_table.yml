@@ -1,0 +1,9 @@
+Resources:
+  RawGlueTable:
+    Type: AWS::Glue::Table
+    Properties: 
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: ${file(./modules/glue_table/params.yml):${file(./env.yml):Stage}.Glue_DB_name}
+      TableInput: 
+        #TableInput #map the table input file 
+        ${file(./modules/glue_table/params.yml):${file(./env.yml):Stage}.Table_Input}

@@ -1,0 +1,12 @@
+owner: ai@nutrien.com
+department-functionalarea: applications-ea bi and reporting
+application: InsightsDSC
+application_id: 2261
+environment: ${opt:stage}
+role: datapipeline
+patch-group: excluded
+project-name: insights-dscdata-cicd-test
+data-classification: internal use
+pipeline: insights-dscdata-cicd-test
+buisness-unit: IDS
+buisness-region: na
